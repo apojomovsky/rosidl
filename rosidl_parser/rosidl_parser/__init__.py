@@ -750,7 +750,7 @@ def parse_action_string(pkg_name, action_name, message_string):
         raise InvalidServiceSpecification(
             "Could not find separator '%s' between action goal, result and feedback services" %
             SERVICE_REQUEST_RESPONSE_SEPARATOR)
-    if len(separator_indices) != 3:
+    if len(separator_indices) != 2:
         raise InvalidServiceSpecification(
             "Could not find unique separator '%s' between action goal, result and \
             feedback services" %
@@ -774,7 +774,8 @@ def parse_action_string(pkg_name, action_name, message_string):
         action_name + ACTION_GOAL_MESSAGE_SUFFIX + SERVICE_RESPONSE_MESSAGE_SUFFIX,
         response_message_string)
 
-    services.append(ServiceSpecification(pkg_name, action_name, request_message, response_message))
+    services.append(ServiceSpecification(
+        pkg_name, action_name + ACTION_GOAL_MESSAGE_SUFFIX, request_message, response_message))
     #----------------------------------------------------------------------------------------------
 
     #----------------------------------------------------------------------------------------------
@@ -794,7 +795,8 @@ def parse_action_string(pkg_name, action_name, message_string):
         action_name + ACTION_RESULT_MESSAGE_SUFFIX + SERVICE_RESPONSE_MESSAGE_SUFFIX,
         response_message_string)
 
-    services.append(ServiceSpecification(pkg_name, action_name, request_message, response_message))
+    services.append(ServiceSpecification(
+        pkg_name, action_name + ACTION_RESULT_MESSAGE_SUFFIX, request_message, response_message))
     #----------------------------------------------------------------------------------------------
 
     #----------------------------------------------------------------------------------------------
