@@ -88,34 +88,4 @@ def generate_c(generator_arguments_file):
                     template_file, data, generated_file,
                     minimum_timestamp=latest_target_timestamp)
 
-        elif extension == '.action':
-            (services, feedback_msg) = spec = parse_action_file(pkg_name, ros_interface_file)
-
-            for spec in services:
-                validate_field_types(spec, known_msg_types)
-                for template_file, generated_filename in mapping_srvs.items():
-                    generated_file = os.path.join(
-                        args['output_dir'], subfolder, generated_filename %
-                        convert_camel_case_to_lower_case_underscore(spec.srv_name))
-
-                    data = {'spec': spec, 'subfolder': subfolder}
-                    data.update(functions)
-                    expand_template(
-                        template_file, data, generated_file,
-                        minimum_timestamp=latest_target_timestamp)
-
-            # action feedback message spec
-            spec = feedback_msg
-            validate_field_types(spec, known_msg_types)
-            for template_file, generated_filename in mapping_msgs.items():
-                generated_file = os.path.join(
-                    args['output_dir'], subfolder, generated_filename %
-                    convert_camel_case_to_lower_case_underscore(spec.base_type.type))
-
-                data = {'spec': spec, 'subfolder': subfolder}
-                data.update(functions)
-                expand_template(
-                    template_file, data, generated_file,
-                    minimum_timestamp=latest_target_timestamp)
-
     return 0
