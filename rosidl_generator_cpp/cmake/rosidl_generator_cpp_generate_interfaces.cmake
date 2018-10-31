@@ -25,20 +25,26 @@ foreach(_idl_file ${rosidl_generate_interfaces_IDL_FILES})
   string_camel_case_to_lower_case_underscore("${_msg_name}" _header_name)
 
   if(_parent_folder STREQUAL "msg")
-    set(_generated_files "_generated_msg_files")
+    list(APPEND ${_generated_msg_files}
+      "${_output_path}/${_parent_folder}/${_header_name}.hpp"
+      "${_output_path}/${_parent_folder}/${_header_name}__struct.hpp"
+      "${_output_path}/${_parent_folder}/${_header_name}__traits.hpp"
+    )
   elseif(_parent_folder STREQUAL "srv")
-    set(_generated_files "_generated_srv_files")
+    list(APPEND ${_generated_srv_files}
+      "${_output_path}/${_parent_folder}/${_header_name}.hpp"
+      "${_output_path}/${_parent_folder}/${_header_name}__struct.hpp"
+      "${_output_path}/${_parent_folder}/${_header_name}__traits.hpp"
+    )
   elseif(_parent_folder STREQUAL "action")
-    set(_generated_files "_generated_action_files")
+    list(APPEND ${_generated_action_files}
+      "${_output_path}/${_parent_folder}/${_header_name}.hpp"
+      "${_output_path}/${_parent_folder}/${_header_name}__struct.hpp"
+    )
   else()
     message(FATAL_ERROR "Interface file with unknown parent folder: ${_idl_file}")
   endif()
 
-  list(APPEND ${_generated_files}
-    "${_output_path}/${_parent_folder}/${_header_name}.hpp"
-    "${_output_path}/${_parent_folder}/${_header_name}__struct.hpp"
-    "${_output_path}/${_parent_folder}/${_header_name}__traits.hpp"
-  )
 endforeach()
 
 set(_dependency_files "")
