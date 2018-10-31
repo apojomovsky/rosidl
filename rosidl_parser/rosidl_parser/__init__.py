@@ -766,7 +766,7 @@ def parse_action_string(pkg_name, action_name, message_string):
         action_name + ACTION_GOAL_MESSAGE_SUFFIX + SERVICE_REQUEST_MESSAGE_SUFFIX,
         request_message_string)
 
-    implicit_output = ["bool accepted", "time timestamp"]
+    implicit_output = ["bool accepted", "builtin_interfaces/Time timestamp"]
     response_message_string = '\n'.join(implicit_output)
     response_message = parse_message_string(
         pkg_name,
